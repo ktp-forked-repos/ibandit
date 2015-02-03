@@ -90,7 +90,7 @@ module Ibandit
       # Additional info:
       #   Cypriot bank and branch codes are often communicated as a single code,
       #   so this method handles being passed them together or separately.
-      combined_bank_code = opts[:bank_code]
+      combined_bank_code = opts[:bank_code].tr('-', '')
       combined_bank_code += opts[:branch_code] || ''
 
       [
@@ -251,7 +251,7 @@ module Ibandit
       [
         opts[:bank_code],
         opts[:branch_code],
-        opts[:account_number]
+        opts[:account_number].gsub(/[-\s]/, '')
       ].join
     end
 
@@ -429,7 +429,7 @@ module Ibandit
       [
         opts[:bank_code],
         opts[:branch_code],
-        opts[:account_number]
+        opts[:account_number].gsub(/[\.\s]/, '')
       ].join
     end
 

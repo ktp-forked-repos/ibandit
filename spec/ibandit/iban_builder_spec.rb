@@ -120,6 +120,13 @@ describe Ibandit::IBANBuilder do
         its(:iban) { is_expected.to eq('CY040020000001200527600') }
       end
 
+      context 'with a combined bank and branch code' do
+        before { args.delete(:branch_code) }
+        before { args[:bank_code] = '002-00128' }
+
+        its(:iban) { is_expected.to eq('CY17002001280000001200527600') }
+      end
+
       context 'without an account_number' do
         before { args.delete(:account_number) }
 
@@ -271,7 +278,7 @@ describe Ibandit::IBANBuilder do
           country_code: 'FR',
           bank_code: '20041',
           branch_code: '01005',
-          account_number: '0500013M02606'
+          account_number: '0500013M026-06'
         }
       end
 
@@ -727,7 +734,7 @@ describe Ibandit::IBANBuilder do
           country_code: 'PT',
           bank_code: '0002',
           branch_code: '0023',
-          account_number: '0023843000578'
+          account_number: '00238430005.78'
         }
       end
 
